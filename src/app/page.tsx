@@ -24,15 +24,16 @@ const searchWord = async (search: string): Promise<any> => {
 };
 
 interface Props {
-  searchParams: { search: string };
+  searchParams: Promise<{ search: string }>;
 }
 
 export default async function Home({ searchParams }: Props) {
 
-  const result: any = await searchWord(searchParams.search);
+  const { search } = await searchParams;
+  const result: any = await searchWord(search);
 
   const words: Word[] = result;
-  if (!searchParams.search) return <p> </p>;
+  if (!search) return <p> </p>;
 
   return (
   
